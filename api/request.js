@@ -4,7 +4,11 @@ import { xmlToJson } from './xml-to-json';
 export function request(method, url, defaultParams = {}) {
   return (params = {}) => {
     const query = new URLSearchParams(params.query).toString();
-    const headers = { ...defaultParams.header, ...params.header };
+    const headers = {
+      Authorization: `Bearer ${process.env.STORECOVE_API_KEY}`,
+      ...defaultParams.header,
+      ...params.header
+    };
 
     let body;
 
