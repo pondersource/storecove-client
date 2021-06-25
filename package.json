@@ -1,7 +1,7 @@
 {
-  "name": "ledgerloops-boilerplate",
+  "name": "storecove-client",
   "version": "2.5.0",
-  "description": "Basic build environment for reference",
+  "description": "TypeScript client for Storecove's API (version 2.0.1), generated from https://www.storecove.com/api/v2/openapi.json",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
@@ -21,14 +21,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ledgerloops/boilerplate.git"
+    "url": "git+https://github.com/pondersource/storecove-client.git"
   },
   "author": "Michiel B. de Jong",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ledgerloops/boilerplate/issues"
+    "url": "https://github.com/pondersource/storecove-client/issues"
   },
-  "homepage": "https://github.com/ledgerloops/boilerplate#readme",
+  "homepage": "https://github.com/pondersource/storecove-client#readme",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.7",
