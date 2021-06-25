@@ -48,8 +48,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.request = void 0;
+var fetch = require("node-fetch");
 var json_to_xml_1 = require("./json-to-xml");
 var xml_to_json_1 = require("./xml-to-json");
+var STORECOVE_API_ROOT = process.env.STORECOVE_API_ROOT || 'https://api.storecove.com/api/v2';
 function request(method, url, defaultParams) {
     var _this = this;
     if (defaultParams === void 0) { defaultParams = {}; }
@@ -65,6 +67,10 @@ function request(method, url, defaultParams) {
             });
             return result;
         };
+        if (typeof headers['Content-Type'] === 'undefined') {
+            // if not defined, assume we send what we accept:
+            headers['Content-Type'] = headers.accept;
+        }
         if (params.body) {
             switch (headers.accept) {
                 case "multipart/form-data":
@@ -84,7 +90,17 @@ function request(method, url, defaultParams) {
         else if (params.formData) {
             body = buildFormData(params.formData);
         }
-        return fetch("" + url + (query ? "?" + query : ""), {
+        body = "{ \"party_name\": \"Test Party\", \"line1\": \"Test Street\", \"city\": \"Test City\", \"zip\": \"Zippy\", \"country\": \"NL\", \"tenant_id\": \"my_id\"}";
+        // CAREFUL: this will print your unencrypted Authorization header in the logs
+        if (process.env.STORECOVE_DEBUG) {
+            console.log('API request', {
+                url: "" + STORECOVE_API_ROOT + url + (query ? "?" + query : ""),
+                method: method,
+                headers: headers,
+                body: body
+            });
+        }
+        return fetch("" + STORECOVE_API_ROOT + url + (query ? "?" + query : ""), {
             method: method,
             headers: headers,
             body: body
